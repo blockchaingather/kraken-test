@@ -31,11 +31,3 @@ docker build -t kraken:test .
 ```bash
     docker-compose up
 ```
-
-## 5. clean json file and mysql data
-
-```bash
-# step 1 enter container instance
-# step 2 cd /app
-# step 3 npm run clean
-```
