@@ -1,6 +1,6 @@
 import constant from '../constant/constant';
 import KrakenTransactions from '../models/kraken-transactions';
-import { Op } from 'sequelize';
+import { Op, Sequelize } from 'sequelize';
 
 const transaction = {
     async count(
@@ -41,10 +41,14 @@ const transaction = {
                 [Op.gte]: constant.VALID_CONFIRMATIONS
             }
         };
-        const min = await KrakenTransactions.min('amount', {
-            where: where
+        const min = await KrakenTransactions.findAll({
+            attributes: ['amount'],
+            where: where,
+            order: [[Sequelize.cast(Sequelize.col('amount'), 'SIGNED'), 'asc']],
+            limit: 1,
+            offset: 0
         });
-        console.log(`Smallest valid deposit: ${min}`);
+        console.log(`Smallest valid deposit: ${min[0].amount}`);
     },
     async max() {
         const where = {

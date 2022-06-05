@@ -12,10 +12,10 @@ services:
             MYSQL_PASSWORD: ${MYSQL_PASSWORD}
             MYSQL_DATABASE: ${MYSQL_DATABASE}
             MYSQL_PORT: ${MYSQL_PORT}
-        command: >
+        entrypoint: >
             bash -c '
-            sleep 15;
-            npm run clean:table && npm run import && npm run start'
+                /app/script/wait-for-it.sh db:3306 -- npm run clean:table && npm run import && npm run start
+            '
         depends_on:
             - db
         links:
@@ -32,6 +32,8 @@ services:
         command: --character-set-server=utf8mb4
             --collation-server=utf8mb4_general_ci
             --init-file /docker-entrypoint-initdb.d/init.sql
+        extra_hosts:
+            db: ${MYSQL_HOST}
         environment:
             MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
             MYSQL_USER: ${MYSQL_USER}
