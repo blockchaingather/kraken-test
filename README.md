@@ -15,8 +15,9 @@ Copy .env.example file and rename it to .env. Then fill values in .env file.
 MYSQL_HOST=172.17.0.1
 MYSQL_USER=your mysql user
 MYSQL_PASSWORD=your mysql password
-MYSQL_DATABASE=your mysql database
+MYSQL_DATABASE=kraken_test
 MYSQL_PORT = 3306
+
 ```
 
 Notice: Please make sure your MYSQL_HOST(docker host) is correct.
@@ -34,7 +35,9 @@ docker build -t kraken:test .
 ```bash
 docker-compose up
 ```
+
 Results below：
+
 ```
 kraken-test | Deposited for Wesley Crusher: count=35 sum=183
 kraken-test | Deposited for Leonard McCoy: count=18 sum=97
