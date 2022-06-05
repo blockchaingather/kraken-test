@@ -1,0 +1,40 @@
+version: '3'
+services:
+    kraken:
+        env_file:
+            - .env
+        build: .
+        image: 'kraken:test'
+        container_name: kraken-test
+        environment:
+            MYSQL_HOST: ${MYSQL_HOST}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_PORT: ${MYSQL_PORT}
+        command: >
+            bash -c '
+            sleep 15;
+            npm run clean:table && npm run import && npm run start'
+        depends_on:
+            - db
+        links:
+            - db
+        volumes:
+            - ./json:/app/json
+    db:
+        env_file:
+            - .env
+        image: mysql
+        container_name: mysql8
+        ports:
+            - 3306:3306
+        command: --character-set-server=utf8mb4
+            --collation-server=utf8mb4_general_ci
+            --init-file /docker-entrypoint-initdb.d/init.sql
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+        volumes:
+            - ./sql/data.sql:/docker-entrypoint-initdb.d/init.sql

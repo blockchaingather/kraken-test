@@ -1,0 +1,17 @@
+# Compiled JavaScript files
+**/*.js
+**/*.js.map
+
+# Except the ESLint config file
+!.eslintrc.js
+
+# Node.js dependency directory
+node_modules
+
+# Environment Variable
+.env
+.env.development
+.env.production
+
+# logs directory
+logs
