@@ -8,10 +8,5 @@
 # Node.js dependency directory
 node_modules
 
-# Environment Variable
-.env
-.env.development
-.env.production
-
 # logs directory
 logs
