@@ -1,4 +1,4 @@
-CREATE DATABASE if not exists `kraken_test` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+CREATE DATABASE if not exists `m` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 
 use kraken_test;
 
